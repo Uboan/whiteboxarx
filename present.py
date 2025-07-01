@@ -363,7 +363,7 @@ if __name__ == '__main__':
     bpr = sage.all.GF(2)
 
         
-    output_file_name = "31round_anf_bits"
+    output_file_name = args.output_file
     implicit_functions = get_implicit_encoded_present_functions(None,output_file_name,True)
     
     
