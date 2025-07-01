@@ -1,5 +1,7 @@
 """Script to generate an implicit white-box implementation of a given ARX cipher"""
 import os
+import sys
+sys.path.append('~/sage/whiteboxarx/whiteboxarx')
 
 import sage.all
 
@@ -63,13 +65,26 @@ if __name__ == '__main__':
                 PRINT_TIME_GENERATION, PRINT_DEBUG_GENERATION)
     elif irf_degree == 3 or irf_degree == 4:
         from whiteboxarx.implicit_wb_with_quadratic_encodings import get_implicit_encoded_round_funcions
-
-        # quadratic encodings
         ws, implicit_encoded_round_functions, explicit_extin_anf, explicit_extout_anf = \
             get_implicit_encoded_round_funcions(
                 unimplicit_encoded_affine_layers, unencoded_explicit_affine_layers, args.debug_file,
                 SEED, (irf_degree == 3), MAX_DEG_IRF, USE_REDUNDANT_PERTURBATIONS,
                 TRIVIAL_EE, TRIVIAL_GA, TRIVIAL_RP, TRIVIAL_AE, TRIVIAL_QE,
                 PRINT_TIME_GENERATION, PRINT_DEBUG_GENERATION)
+        # quadratic encodings
+        # if irf_degree==3 :
+        #     ws, implicit_encoded_round_functions, explicit_extin_anf, explicit_extout_anf = \
+        #         get_implicit_encoded_round_funcions(
+        #             unimplicit_encoded_affine_layers, unencoded_explicit_affine_layers, args.debug_file,
+        #             SEED, (irf_degree == 3), MAX_DEG_IRF, USE_REDUNDANT_PERTURBATIONS,
+        #             TRIVIAL_EE, TRIVIAL_GA, TRIVIAL_RP, TRIVIAL_AE, TRIVIAL_QE,
+        #             PRINT_TIME_GENERATION, PRINT_DEBUG_GENERATION)
+        # else:
+        #     ws, implicit_encoded_round_functions, explicit_extin_anf, explicit_extout_anf = \
+        #         get_implicit_encoded_round_funcions(
+        #             unimplicit_encoded_affine_layers, unencoded_explicit_affine_layers, args.debug_file,
+        #             SEED, (irf_degree == 3), MAX_DEG_IRF, USE_REDUNDANT_PERTURBATIONS,
+        #             TRIVIAL_EE, TRIVIAL_GA, TRIVIAL_RP, TRIVIAL_AE, TRIVIAL_QE,
+        #             PRINT_TIME_GENERATION, PRINT_DEBUG_GENERATION)
 
     sage.all.save((implicit_encoded_round_functions, explicit_extin_anf, explicit_extout_anf), args.output_file, compress=True)

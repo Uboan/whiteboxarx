@@ -1,0 +1,273 @@
+ASASA生成：
+sage -python3 present.py --output-file 31round_anf
+
+
+
+
+
+
+隐函数生成和运行：
+
+
+gcc   speck_key_recovery.c  -o speck_key_recovery > /dev/null 2>&1
+
+
+
+
+
+
+
+M4RI installation:
+$ tar -xvf m4ri-20200125.tar.gz 
+cd m4ri-20200125
+$ autoreconf --install
+$ ./configure
+$ make
+$ make check
+
+cd 至wbarx，然后
+
+$ make
+
+$ gcc -I/../m4ri-20200125/include -L/../m4ri-20200125 white_box_arx.c -lm4ri -o white_box_arx
+$ gcc -I/../m4ri-20200125/include -L/../m4ri-20200125 white_box_arx.c -lm4ri -o white_box_arx.gold_new
+$ smem -k #查看进程使用内存情况
+
+https://github.com/jvdsn/white-box-speck
+
+$ gcc   white_box_arx.c -lm4ri -o white_box_arx > /dev/null 2>&1
+
+6574 694c
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 1987 0012 9999 1111 --block-size 32 --output-file speck32_64_affine_layers_new.sobj 
+
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers_new.sobj --irf-degree 3 --trivial-external-encodings --trivial-quadratic-encodings --disable-redundant-perturbations --output-file speck32_64_irf_new.sobj
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck32_64_irf_new.sobj --irf-degree 3 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE
+
+~/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers.sobj --irf-degree 3 --output-file speck32_64_irf.sobj
+
+~/sage/sage/SageMath/./sage -python export_wb.py --input-file speck32_64_irf.sobj --irf-degree 3 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;"
+
+-------------------start--------------------self_equivalance------------------------------------------------
+
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 32 --key-size 64 1918 1110 0908 0100
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 48 --key-size 72 191811 100908 018ffa
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 48 --key-size 96 191811 100908 018ffa 018ffa
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 64 --key-size 96 00010203 08090a0b 10111213
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 64 --key-size 128 19181110 09080100 08090a0b 10111213
+10100001101001011111101100110110
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 96 --key-size 96 0d0c0b0a0908 050403020100
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 96 --key-size 144 191811100908 018ffa08090a 0a0b10111213
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 128 --key-size 128 0f0e0d0c0b0a0908 0706050403020100
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 128 --key-size 192 1716151413121110 0f0e0d0c0b0a0908 0706050403020100
+$ /home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 128 --key-size 256 1f1e1d1c1b1a1918 1716151413121110 0f0e0d0c0b0a0908 0706050403020100
+
+------------------end---------------------self_equivalance------------------------------------------------
+
+gcc -march=native -O3 -o speck32K64 default_white_box_speck_32_K64.c
+gcc -march=native -O3 -o speck48K72 default_white_box_speck_48_K72.c
+gcc -march=native -O3 -o speck48K96 default_white_box_speck_48_K96.c
+gcc -march=native -O3 -o speck64K96 default_white_box_speck_64_K96.c
+gcc -march=native -O3 -o speck64K128 default_white_box_speck_64_K128.c
+gcc -march=native -O3 -o speck96K96 default_white_box_speck_96_K96.c
+gcc -march=native -O3 -o speck96K144 default_white_box_speck_96_K144.c
+gcc -march=native -O3 -o speck128K128 default_white_box_speck_128_K128.c
+gcc -march=native -O3 -o speck128K192 default_white_box_speck_128_K192.c
+gcc -march=native -O3 -o speck128K256 default_white_box_speck_128_K256.c
+
+
+
+---------------------------32/64----------------------------degree 2 --------------
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 1918 1110 0908 0100 --block-size 32 --output-file speck32_64_affine_layers_hei.sobj 
+
+
+---affine
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers_hei.sobj --irf-degree 2 --trivial-quadratic-encodings --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation  --output-file speck32_64_irf_32K64_2_affineEncoding.sobj
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck32_64_irf_32K64_2_affineEncoding.sobj --irf-degree 2 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE_32K64_2_aff
+
+---quadratic
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers_hei.sobj --irf-degree 2 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation  --output-file speck32_64_irf_32K64_2_quadraticEncoding.sobj
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck32_64_irf_32K64_2_quadraticEncoding.sobj --irf-degree 2 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE_32K64_2_qua
+
+
+---------------------------32/64----------------------------degree 3 --------------
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 1918 1110 0908 0100 --block-size 32 --output-file speck32_64_affine_layers_hei.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers_hei.sobj --irf-degree 3 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation  --output-file speck32_64_irf_3.sobj
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck32_64_irf_3.sobj --irf-degree 3 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE_32K64_3
+
+---------------------------32/64----------------------------degree 4 --------------
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 1918 1110 0908 0100 --block-size 32 --output-file speck32_64_affine_layers_hei.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers_hei.sobj --irf-degree 4 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation  --output-file speck32_64_irf_4.sobj
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers_hei.sobj --irf-degree 4 --trivial-external-encodings  --disable-redundant-perturbations --disable-max-degree --print-time-generation --print-debug-generation  --output-file speck32_64_irf_4.sobj
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck32_64_irf_4.sobj --irf-degree 4 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE32K_64_irf_4
+
+------------external encodings
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers_hei.sobj --irf-degree 4  --disable-redundant-perturbations --print-time-generation --print-debug-generation  --output-file speck32_64_irf_4_external.sobj
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck32_64_affine_layers_hei.sobj --irf-degree 4  --disable-redundant-perturbations --disable-max-degree --print-time-generation --print-debug-generation  --output-file speck32_64_irf_4_external.sobj
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck32_64_irf_4_external.sobj --irf-degree 4 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE32K_64_irf_4_ex
+
+
+
+
+
+---------------------------64/128----------------------------degree 2 --------------
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 0f0e0d0c 0b0a0908 07060504 03020100 --block-size 64 --output-file speck64_128_affine_layers.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck64_128_affine_layers.sobj --irf-degree 2 --trivial-quadratic-encodings --trivial-external-encodings  --disable-redundant-perturbations --output-file speck64_128_irf_2.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck64_128_irf_2.sobj --irf-degree 2 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE64128_2 && /home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck128_256_affine_layers.sobj --irf-degree 2 --trivial-quadratic-encodings --trivial-external-encodings  --disable-redundant-perturbations --output-file speck128_256_irf_2.sobj 
+
+
+---------------------------64/128----------------------------degree 3 --------------
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 0f0e0d0c 0b0a0908 07060504 03020100 --block-size 64 --output-file speck64_128_affine_layers.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck64_128_affine_layers.sobj --irf-degree 3 --trivial-external-encodings  --disable-redundant-perturbations --output-file speck64_128_irf.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck64_128_irf_3.sobj --irf-degree 3 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE641283
+
+---------------------------64/128----------------------------degree ４ --------------
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 0f0e0d0c 0b0a0908 07060504 03020100 --block-size 64 --output-file speck64_128_affine_layers.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck64_128_affine_layers.sobj --irf-degree ４ --trivial-external-encodings --disable-redundant-perturbations --disable-max-degree --print-time-generation --print-debug-generation --output-file speck64_128_irf_4.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck64_128_irf.sobj --irf-degree ４ --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings  --debug-file DEBUG_FILE64128
+
+
+---------------------------128/256------------------------------degree 2------------
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 1f1e1d1c1b1a1918 1716151413121110 0f0e0d0c0b0a0908 0706050403020100 --block-size 128 --output-file speck128_256_affine_layers.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck128_256_affine_layers.sobj --irf-degree 2 --trivial-quadratic-encodings --trivial-external-encodings  --disable-redundant-perturbations --output-file speck128_256_irf_2.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck128_256_irf_2.sobj --irf-degree 3 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE128_256_2
+
+---------------------------128/256------------------------------degree 3------------
+/home/uboan_linux/sage/sage/SageMath/./sage -python speck.py --key 1f1e1d1c1b1a1918 1716151413121110 0f0e0d0c0b0a0908 0706050403020100 --block-size 128 --output-file speck128_256_affine_layers.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file speck128_256_affine_layers.sobj --irf-degree 3 --trivial-external-encodings  --disable-redundant-perturbations --output-file speck128_256_irf.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file speck128_256_irf.sobj --irf-degree 3 --first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_FILE128_256
+
+
+
+
+
+
+
+
+
+echo $PYTHONPATH
+/home/uboan_linux/sage/whiteboxarx:~\sage\whiteboxarx:~/sage/whiteboxarx:~/sage/whiteboxarx/whiteboxarx:/home/uboan_linux/sage/whiteboxarx/whiteboxarx/BoolCrypt-main:\home\uboan_linux\sage\whiteboxarx\whiteboxarx\BoolCrypt-main:\home\uboan_linux\sage:\home\uboan_linux\sage\BoolCrypt\BoolCrypt-main:\home\uboan_linux\sage\BoolCrypt\BoolCrypt-main:~/sage/whiteboxarx/whiteboxarx:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/f/VMware/bin/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Users/13728/AppData/Local/Microsoft/WindowsApps:/mnt/e/software/Microsoft VS Code/bin:/mnt/e/Nmap:/snap/bin:/home/uboan_linux/sage/sage/SageMath:/home/uboan_linux/sage/m4ri-20200125
+
+echo $PATH
+\home\uboan_linux\sage\BoolCrypt\BoolCrypt-main:~/sage/whiteboxarx/whiteboxarx:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/f/VMware/bin/:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Users/13728/AppData/Local/Microsoft/WindowsApps:/mnt/e/software/Microsoft VS Code/bin:/mnt/e/Nmap:/snap/bin:/home/uboan_linux/sage/sage/SageMath:/home/uboan_linux/sage/m4ri-20200125
+
+
+
+--------crax
+-----degree 2
+rm crax64_128_affine_layers.sobj
+rm crax64_128_affine_layers_affineEncoding.sobj & rm DEBUG_crax64_128_affine_layers_affineEncoding
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python crax.py --key 0f0e0d0c 0b0a0908 07060504 03020100 --block-size 64 --output-file crax64_128_affine_layers.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file  crax64_128_affine_layers.sobj --irf-degree 2 --trivial-quadratic-encodings --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation  --output-file crax64_128_affine_layers_affineEncoding.sobj
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file crax64_128_affine_layers_affineEncoding.sobj --irf-degree 2 --first-explicit-round "" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_crax64_128_affine_layers_affineEncoding
+
+gcc   white_box_arx.c -lm4ri -o white_box_crax > /dev/null 2>&1
+
+./white_box_crax 0f0e0d0c 0b0a0908
+
+--------crax
+-----degree 3
+
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file crax64_128_affine_layers.sobj --irf-degree 3 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation --output-file crax64_128_3Encoding.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file crax64_128_3Encoding.sobj --irf-degree 3 --first-explicit-round "" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_crax64_128_3Encoding
+
+gcc   white_box_arx.c -lm4ri -o white_box_crax > /dev/null 2>&1
+
+./white_box_crax 0f0e0d0c 0b0a0908
+
+
+-----degree 3 round2
+
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python crax.py --key 0f0e0d0c 0b0a0908 07060504 03020100 --block-size 64 --output-file crax64_128_affine_layers2.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file crax64_128_affine_layers2.sobj --irf-degree 3 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation --output-file crax64_128_3Encoding2.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file crax64_128_3Encoding2.sobj --irf-degree 3 --first-explicit-round "" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_crax64_128_3Encoding2
+
+gcc   white_box_arx.c -lm4ri -o white_box_crax > /dev/null 2>&1
+
+./white_box_crax 0f0e0d0c 0b0a0908
+
+-----degree 3 round1
+
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python crax.py --key 0f0e0d0c 0b0a0908 07060504 03020100 --block-size 64 --output-file crax64_128_affine_layers1.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file crax64_128_affine_layers1.sobj --irf-degree 3 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation --output-file crax64_128_3Encoding1.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file crax64_128_3Encoding1.sobj --irf-degree 3 --first-explicit-round "" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_crax64_128_3Encoding1
+
+gcc   white_box_arx.c -lm4ri -o white_box_crax > /dev/null 2>&1
+
+
+--------crax
+-----degree 4
+
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file crax64_128_affine_layers.sobj --irf-degree 4 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation --output-file crax64_128_4encoding.sobj 
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python export_wb.py --input-file crax64_128_4encoding.sobj --irf-degree 4 --first-explicit-round "" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_crax64_128_4encoding
+
+gcc   white_box_arx.c -lm4ri -o white_box_crax > /dev/null 2>&1
+
+./white_box_crax 0f0e0d0c 0b0a0908
+
+x_crax 0f0e0d0c 0b0a0908
+
+
+--------crax
+-----self_equivalence
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python -m white_box_speck --block-size 64 --key-size 128 0f0e0d0c 0b0a0908 07060504 03020100
+gcc -march=native -o crax64K128 default_white_box_crax.c
+./crax64K128 0f0e0d0c 0b0a0908
+
+
+
+/home/uboan_linux/sage/sage/SageMath/./sage -python generate_wb.py --input-file crax64_128_affine_layers.sobj --seed 123049 --irf-degree 4 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation --output-file crax64_128_4encoding.sobj
+

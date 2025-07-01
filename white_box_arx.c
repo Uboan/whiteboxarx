@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <m4ri/m4ri.h>
 
-#include "white_box_backend.c"
+#include "white_box_arx.gold.c"
 
 // A monomial consists of a boolean flag and four bit-packed words.
 // If is_zero is set, the monomial represents '0' and the other fields are ignored.
@@ -275,18 +275,19 @@ void encrypt(monomial *monomials, monomial *substituted, WORD_TYPE p[2], WORD_TY
 
     FIRST_EXPLICIT_ROUND(c[0], c[1]);
 
-#ifdef MONOMIALS_EXTIN
-    evaluate_explicit(monomials, substituted, c[0], c[1], MONOMIALS_EXTIN, COEFFS_EXTIN, &c[0], &c[1]);
-#endif
+// #ifdef MONOMIALS_EXTIN
+//     evaluate_explicit(monomials, substituted, c[0], c[1], MONOMIALS_EXTIN, COEFFS_EXTIN, &c[0], &c[1]);
+// #endif
 
     size_t coeffs_index = 0;
-    for (size_t r = 0; r < ROUNDS; r++) {
+    for (size_t r = 0; r < 21; r++) {
         solve_implicit(monomials, substituted, c[0], c[1], &coeffs_index, &c[0], &c[1]);
+        // printf("Address of c: %p\n", (void*)&c[1]);
     }
 
-#ifdef MONOMIALS_EXTOUT
-    evaluate_explicit(monomials, substituted, c[0], c[1], MONOMIALS_EXTOUT, COEFFS_EXTOUT, &c[0], &c[1]);
-#endif
+// #ifdef MONOMIALS_EXTOUT
+//     evaluate_explicit(monomials, substituted, c[0], c[1], MONOMIALS_EXTOUT, COEFFS_EXTOUT, &c[0], &c[1]);
+// #endif
 
     LAST_EXPLICIT_ROUND(c[0], c[1]);
 }

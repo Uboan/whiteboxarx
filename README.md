@@ -232,3 +232,4 @@ Thus, the input to the explicit rounds can be obtained from the variables `x` an
 For example, for Speck 32/64, to implement the first initial round $x, y \mapsto ((x \ggg 7) + y, y)$, the following parameter `first-explicit-round` can be used for both the Python evaluation and the C exporting
 
 `--first-explicit-round "x = ((x >> 7) | (x << (WORD_SIZE - 7))); x = (x + y) & WORD_MASK;"` 
+# SCNUwhiteboxarx

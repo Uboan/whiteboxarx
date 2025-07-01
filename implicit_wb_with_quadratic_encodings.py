@@ -23,7 +23,9 @@ def get_explicit_affine_quadratic_se_encodings(wordsize, explicit_affine_layers,
     ws = wordsize
 
     if TRIVIAL_QE:
-        rounds = len(explicit_affine_layers)
+        rounds = len(explicit_affine_layers) #for speck
+        #
+        #  rounds = 40 # for CRAX
         assert rounds == len(graph_automorphisms)
 
         names_x = ["x" + str(i) for i in range(ws)]
@@ -111,7 +113,8 @@ def get_implicit_encoded_round_funcions(
 
     implicit_round_functions = []
     list_degs = []
-    for i in range(rounds):
+    i=0
+    while(i<rounds):
         anf = compose_anf_fast(implicit_pmodadd, graph_automorphisms[i])
         anf = compose_anf_fast(anf, implicit_affine_layers[i])
         #
@@ -121,14 +124,25 @@ def get_implicit_encoded_round_funcions(
         anf = compose_anf_fast(anf, implicit_affine_round_encodings[i])
         anf = list(left_permutations[i].matrix * sage.all.vector(bpr_pmodadd, anf))
         assert bpr_pmodadd == implicit_affine_layers[i][0].parent()
-
+        # print("\n i=")
+        print(i)
+        # print("\n")
         degs = [f.degree() for f in anf]
+        print(max(degs))
         # if TRIVIAL_QE or (i == 0 and TRIVIAL_EE):  # input external encoding is affine
         if TRIVIAL_QE or i == 0:
             assert max(degs) == 2
         elif not MAX_DEG_IRF:
             assert max(degs) >= 3
         else:
+        #(i==1) and (max(degs)<4):
+            # print("\n i=")
+            # print(i)
+            # print("\n")
+            
+            
+            
+            #continue
             assert max(degs) == (3 if CUBIC_IRF else 4), f"{degs}, {i}/{rounds}"
         list_degs.append(degs)
 
@@ -149,8 +163,9 @@ def get_implicit_encoded_round_funcions(
             implicit_round_functions.append(list_anfs)
         else:
             implicit_round_functions.append(anf)
-
+        i=i+1
     if PRINT_TIME_GENERATION:
         smart_print(f"{get_time()} | generated implicit round functions with degrees {[collections.Counter(degs) for degs in list_degs]}")
+    
 
     return ws, implicit_round_functions, explicit_extin_anf, explicit_extout_anf

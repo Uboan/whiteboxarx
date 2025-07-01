@@ -50,8 +50,10 @@ def get_explicit_affine_quadratic_se_encodings(
         verbose, filename
     ):
     ws = wordsize
-    rounds = len(explicit_affine_layers)
-    assert rounds == len(graph_automorphisms)
+    rounds = len(explicit_affine_layers) #for speck
+    #rounds = 40 #for CRAX
+    print("rounds:"+str(len(graph_automorphisms)))
+    #assert rounds == len(graph_automorphisms)
     smart_print = get_smart_print(filename)
 
     try:

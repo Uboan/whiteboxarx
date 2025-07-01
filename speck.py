@@ -130,6 +130,7 @@ def get_implicit_unencoded_affine_layers(
 
     implicit_round_functions = []
     explicit_affine_layers = []
+    count=0
     for i in range(rounds):
         if i not in [rounds - 2, rounds - 1]:
             # round function is S \circ affine
@@ -142,6 +143,7 @@ def get_implicit_unencoded_affine_layers(
                 [zero_matrix(2*ws, 2*ws), identity_matrix(2*ws)]])
             cta = list(affine[1]) + [0 for _ in range(2*ws)]
             anf = matrix2anf(matrix, bool_poly_ring=bpr_pmodadd, bin_vector=cta)
+            count=count+1
             if not return_implicit_round_functions:
                 implicit_round_functions.append(anf)
             else:
@@ -176,7 +178,7 @@ def get_implicit_unencoded_affine_layers(
             anf2 = matrix2anf(matrix, bool_poly_ring=bpr_pmodadd, bin_vector=cta)
 
             anf = compose_anf_fast(anf1, anf2)
-
+            count=count+1
             if not return_implicit_round_functions:
                 implicit_round_functions.append(anf)
             else:
@@ -185,7 +187,7 @@ def get_implicit_unencoded_affine_layers(
                 explicit_affine_layers[-1].append(affine)
         else:
             continue
-
+    print(count)
     if return_also_explicit_affine_layers:
         return implicit_round_functions, explicit_affine_layers
     else:

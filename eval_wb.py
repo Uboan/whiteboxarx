@@ -226,6 +226,7 @@ def get_eval_implicit_wb_implementation(
 
     return eval_implicit_wb_implementation
 
+import time
 
 if __name__ == '__main__':
     parser = ArgumentParser(prog="sage -python eval_wb.py", description="Evaluate the given implicit white-box implementation")
@@ -274,7 +275,20 @@ if __name__ == '__main__':
         smart_print(f"Evaluating implicit white-box implementation with input ({plaintext[0]:x}, {plaintext[1]:x})\n")
 
     plaintext = bitvectors_to_gf2vector(*plaintext, ws)
-    ciphertext = eval_wb(plaintext)
+
+
+  
+
+    t1=time.perf_counter()
+
+    for i in range(100):
+        ciphertext = eval_wb(plaintext)
+    t2=time.perf_counter()
+    t=(t2-t1)
+    speed=t/100
+    print("speed:",speed,"S")
+    
+    
     ciphertext = gf2vector_to_bitvectors(ciphertext, ws)
 
     if args.print_debug_intermediate_values:
