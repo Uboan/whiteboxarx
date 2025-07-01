@@ -1,20 +1,20 @@
 # ASASA White-box cipher generation
 
-##相关文件
+## 相关文件
 store.py store4.py present.py
 
-##运行命令
+## 运行命令
 sage -python3 present.py --output-file 31round_anf
 
 
 
 # Implicit White-box Implementations of CRAX 
 
-##相关文件
+## 相关文件
 crax.py
 
-##运行命令
-###degree 2
+## 运行命令
+### degree 2
 sage -python crax.py --key 0f0e0d0c 0b0a0908 07060504 03020100 --block-size 64 --output-file crax64_128_affine_layers.sobj 
 
 sage -python generate_wb.py --input-file  crax64_128_affine_layers.sobj --irf-degree 2 --trivial-quadratic-encodings --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation  --output-file crax64_128_affine_layers_affineEncoding.sobj
@@ -23,14 +23,14 @@ sage -python export_wb.py --input-file crax64_128_affine_layers_affineEncoding.s
 
 gcc   white_box_arx.c -lm4ri -o white_box_crax > /dev/null 2>&1
 
-###degree 3
+### degree 3
 sage -python generate_wb.py --input-file crax64_128_affine_layers.sobj --irf-degree 3 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation --output-file crax64_128_3Encoding.sobj 
 
 sage -python export_wb.py --input-file crax64_128_3Encoding.sobj --irf-degree 3 --first-explicit-round "" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_crax64_128_3Encoding
 
 gcc   white_box_arx.c -lm4ri -o white_box_crax > /dev/null 2>&1
 
-###degree 4
+### degree 4
 sage -python generate_wb.py --input-file crax64_128_affine_layers.sobj --irf-degree 4 --trivial-external-encodings  --disable-redundant-perturbations --print-time-generation --print-debug-generation --output-file crax64_128_4encoding.sobj 
 
 sage -python export_wb.py --input-file crax64_128_4encoding.sobj --irf-degree 4 --first-explicit-round "" --disabled-redundant-perturbations --cancel-external-encodings --debug-file DEBUG_crax64_128_4encoding
