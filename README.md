@@ -1,3 +1,28 @@
+# ASASA White-box cipher generation
+
+相关文件：store.py store4.py present.py
+
+###运行命令
+sage -python3 present.py --output-file 31round_anf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Implicit White-box Implementations of ARX Ciphers
 
 This repository contains Python scripts to generate implicit white-box implementations of ARX ciphers following the method described in the paper [Implicit White-Box Implementations: White-Boxing ARX Ciphers](https://eprint.iacr.org/2022/428).
